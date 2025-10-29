@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<video id="videoPlayer" controls autoplay></video>
+<video id="videoPlayer" controls autoplay width="100%" height="100%"></video>
 
 <script>
 function getQueryParam(param) {
@@ -26,22 +26,16 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
-// Cloudflare Worker Proxy
-const proxy = "https://cineproxy.asifansarieng.workers.dev";
-
-// Get ?file=/path/to/video.mp4 from URL
+const proxy = "https://cineproxy.asifansarieng.workers.dev/";
 const file = getQueryParam("file");
 
-// Default Movie URL (behind proxy)
-const defaultVideo =
-  "/Data/movies/Bollywood/2025/Ek%20Deewane%20Ki%20Deewaniyat%20(2025)/Ek%20Deewane%20Ki%20Deewaniyat.mp4";
+let videoUrl = file
+  ? proxy + file
+  : proxy + "http://103.145.232.246/Data/movies/Bollywood/2025/Ek%20Deewane%20Ki%20Deewaniyat%20(2025)/Ek%20Deewane%20Ki%20Deewaniyat.mp4";
 
-// Final Video URL to play
-const videoUrl = proxy + (file ? file : defaultVideo);
-
-// Play video
 document.getElementById("videoPlayer").src = videoUrl;
 </script>
+
 
 </body>
 </html>
