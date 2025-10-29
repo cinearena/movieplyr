@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MP4 Video Player</title>
-
+  <title>CineArena Movie Player</title>
   <style>
     body {
       margin: 0;
@@ -21,30 +20,25 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- VIDEO PLAYER -->
   <video id="videoPlayer" controls autoplay playsinline></video>
 
   <script>
-    const defaultUrl = "http://103.145.232.246/Data/movies/Bollywood/2025/Ek%20Deewane%20Ki%20Deewaniyat%20(2025)/Ek%20Deewane%20Ki%20Deewaniyat.mp4";
+    // Original movie path (without IP)
+    const moviePath = "/Data/movies/Bollywood/2025/Ek%20Deewane%20Ki%20Deewaniyat%20(2025)/Ek%20Deewane%20Ki%20Deewaniyat.mp4";
 
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
+    // Your proxy domain (Cloudflare Worker)
+    const proxyBase = "https://cineproxy.asifansarieng.workers.dev/";
 
-    const streamUrl = getQueryParam("file") || defaultUrl;
+    // Combine for full HTTPS-safe URL
+    const streamUrl = proxyBase + moviePath;
 
-    // ✅ Set Video Source
+    // Assign to player
     const player = document.getElementById("videoPlayer");
     player.src = streamUrl;
 
-    // ✅ Auto Play Fix (mobile)
-    player.addEventListener("canplay", () => {
-      player.play();
-    });
+    player.addEventListener("canplay", () => player.play());
   </script>
 
 </body>
