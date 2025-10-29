@@ -26,15 +26,16 @@ function getQueryParam(param) {
   return urlParams.get(param);
 }
 
-const proxy = "https://cineproxy.asifansarieng.workers.dev/";
+const proxy = "https://cineproxy.asifansarieng.workers.dev/?url=";
 const file = getQueryParam("file");
 
 let videoUrl = file
-  ? proxy + file
-  : proxy + "http://103.145.232.246/Data/movies/Bollywood/2025/Ek%20Deewane%20Ki%20Deewaniyat%20(2025)/Ek%20Deewane%20Ki%20Deewaniyat.mp4";
+  ? proxy + encodeURIComponent(file)
+  : proxy + encodeURIComponent("http://103.145.232.246/Data/movies/Bollywood/2025/Ek%20Deewane%20Ki%20Deewaniyat%20(2025)/Ek%20Deewane%20Ki%20Deewaniyat.mp4");
 
 document.getElementById("videoPlayer").src = videoUrl;
 </script>
+
 
 
 </body>
